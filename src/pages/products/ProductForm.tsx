@@ -137,6 +137,19 @@ const ProductForm = () => {
     }
   };
 
+  const handleDeleteImage = async (imageUrl: string) => {
+    if (!uuid) return;
+    try {
+      const encodedUrl = encodeURIComponent(imageUrl);
+      const response = await api.delete<IProduct>(`/products/${uuid}/images/${encodedUrl}`);
+      setFormData(prev => ({ ...prev, images: response.data.images }));
+      setAlert({ isOpen: true, title: 'Éxito', message: 'Imagen eliminada', type: 'success' });
+    } catch (err) {
+      console.error('Error deleting image:', err);
+      setAlert({ isOpen: true, title: 'Error', message: 'No se pudo eliminar la imagen', type: 'error' });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -347,9 +360,10 @@ const ProductForm = () => {
                   )}
                   <button 
                     type="button"
-                    className="absolute top-2 right-2 p-1 bg-red-100 text-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={() => handleDeleteImage(img.url)}
+                    className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full shadow-lg lg:opacity-0 lg:group-hover:opacity-100 transition-all active:scale-95 z-10"
                   >
-                    <Trash2 size={14} />
+                    <Trash2 size={16} />
                   </button>
                 </div>
               ))}
