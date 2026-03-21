@@ -46,7 +46,7 @@ const AdminLayout = () => {
         }`}
       >
         <div className="flex h-14 items-center justify-between border-b px-4">
-          <span className={`font-black text-xs text-blue-600 uppercase tracking-tighter italic ${!isSidebarOpen && 'hidden'}`}>
+          <span className={`font-black text-xs text-blue-600 uppercase tracking-tighter ${!isSidebarOpen && 'hidden'}`}>
             Tools Admin
           </span>
           <button 

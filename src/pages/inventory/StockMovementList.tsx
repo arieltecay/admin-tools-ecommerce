@@ -40,7 +40,7 @@ const StockMovementList = () => {
       {/* Header Compacto */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight italic">Inventario</h1>
+          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight">Inventario</h1>
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Movimientos de Stock</p>
         </div>
       </div>
@@ -66,7 +66,7 @@ const StockMovementList = () => {
                 <tr key={m._id} className="hover:bg-blue-50/20 transition-all group">
                   <td className="px-4 py-2">
                     <div className="flex flex-col">
-                      <span className="text-[11px] font-black text-gray-800 uppercase italic tracking-tighter leading-none">{m.product.name}</span>
+                      <span className="text-[11px] font-black text-gray-800 uppercase tracking-tighter leading-none">{m.product.name}</span>
                       <span className="text-[9px] text-gray-400 font-mono font-bold uppercase tracking-widest leading-none mt-1">{m.product.sku}</span>
                     </div>
                   </td>
@@ -84,7 +84,7 @@ const StockMovementList = () => {
                     <span className="text-[10px] font-black text-gray-900 bg-gray-100 px-2 py-0.5 rounded-md">{m.stockAfter}</span>
                   </td>
                   <td className="px-4 py-2 text-right">
-                    <span className="text-[10px] font-bold text-gray-400 italic">
+                    <span className="text-[10px] font-bold text-gray-400">
                       {new Intl.DateTimeFormat('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(m.createdAt))}
                     </span>
                   </td>

@@ -75,7 +75,7 @@ const ProductList = () => {
       {/* Header */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-base font-black text-gray-900 uppercase tracking-tight italic">Productos</h1>
+          <h1 className="text-base font-black text-gray-900 uppercase tracking-tight">Productos</h1>
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{totalProducts} Herramientas</p>
         </div>
         <div className="flex gap-2">
@@ -163,12 +163,12 @@ const ProductList = () => {
                       <div className="h-7 w-7 rounded bg-gray-50 border border-gray-100 flex-shrink-0 p-0.5 overflow-hidden">
                         {product.images?.[0]?.url ? <img src={product.images[0].url} className="h-full w-full object-contain" /> : <div className="h-full w-full bg-gray-100" />}
                       </div>
-                      <span className="text-[10px] font-bold text-gray-900 line-clamp-1 italic uppercase tracking-tight">{product.name}</span>
+                      <span className="text-[10px] font-bold text-gray-900 line-clamp-1 uppercase tracking-tight">{product.name}</span>
                     </div>
                   </td>
                   <td className="px-3 py-1.5 text-[9px] font-mono text-gray-400 uppercase">{product.sku}</td>
                   <td className="px-3 py-1.5"><span className="text-[8px] font-black uppercase px-1 py-0.5 bg-gray-50 text-gray-400 rounded-sm border border-gray-100">{product.category?.name || 'N/A'}</span></td>
-                  <td className="px-3 py-1.5 text-[10px] font-black text-gray-900 italic tracking-tighter">${product.price.toLocaleString()}</td>
+                  <td className="px-3 py-1.5 text-[10px] font-black text-gray-900 tracking-tighter">${product.price.toLocaleString()}</td>
                   <td className="px-3 py-1.5 text-[10px] font-bold tracking-tighter">{product.stock} <span className="text-[8px] font-medium text-gray-400">UDS</span></td>
                   <td className="px-3 py-1.5">
                     <span className={`inline-flex rounded-sm px-1.5 py-0.5 text-[7px] font-black uppercase tracking-tight border ${statusColors[product.status] || 'bg-gray-50 text-gray-500'}`}>

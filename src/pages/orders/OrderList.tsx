@@ -63,7 +63,7 @@ const OrderList = () => {
       {/* Header Compacto */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight italic">Pedidos</h1>
+          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight">Pedidos</h1>
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Gestión de Ventas</p>
         </div>
       </div>
@@ -120,16 +120,16 @@ const OrderList = () => {
                         #{order.orderNumber}
                       </Link>
                     </td>
-                    <td className="px-4 py-2 text-[10px] font-bold text-gray-400 italic">
+                    <td className="px-4 py-2 text-[10px] font-bold text-gray-400">
                       {formatDate(order.createdAt)}
                     </td>
                     <td className="px-4 py-2">
                       <div className="flex flex-col">
-                        <span className="text-[11px] font-black text-gray-800 uppercase italic tracking-tighter leading-none">{order.customer.fullName}</span>
+                        <span className="text-[11px] font-black text-gray-800 uppercase tracking-tighter leading-none">{order.customer.fullName}</span>
                         <span className="text-[9px] text-gray-400 font-bold uppercase truncate max-w-[150px]">{order.customer.email}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-2 text-[11px] font-black text-gray-900 italic tracking-tighter">
+                    <td className="px-4 py-2 text-[11px] font-black text-gray-900 tracking-tighter">
                       ${order.pricing.total.toLocaleString()}
                     </td>
                     <td className="px-4 py-2">

@@ -41,7 +41,7 @@ const CustomerList = () => {
       {/* Header Compacto */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight italic">Clientes</h1>
+          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight">Clientes</h1>
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Cartera de Usuarios</p>
         </div>
       </div>
@@ -82,7 +82,7 @@ const CustomerList = () => {
                         <div className="h-7 w-7 rounded-lg bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400">
                           <User size={14} />
                         </div>
-                        <span className="text-[11px] font-black text-gray-800 uppercase italic tracking-tighter leading-none">{c.fullName}</span>
+                        <span className="text-[11px] font-black text-gray-800 uppercase tracking-tighter leading-none">{c.fullName}</span>
                       </div>
                     </td>
                     <td className="px-4 py-2">
@@ -95,9 +95,9 @@ const CustomerList = () => {
                       <span className="text-[10px] font-black text-gray-900 bg-gray-100 px-2 py-0.5 rounded-md">{c.ordersCount}</span>
                     </td>
                     <td className="px-4 py-2">
-                      <span className="text-[11px] font-black text-blue-600 italic tracking-tighter">${c.totalSpent.toLocaleString()}</span>
+                      <span className="text-[11px] font-black text-blue-600 tracking-tighter">${c.totalSpent.toLocaleString()}</span>
                     </td>
-                    <td className="px-4 py-2 text-[10px] font-bold text-gray-400 italic">
+                    <td className="px-4 py-2 text-[10px] font-bold text-gray-400">
                       {formatDate(c.lastOrderAt)}
                     </td>
                     <td className="px-4 py-2 text-right">

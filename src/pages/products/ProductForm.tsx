@@ -121,7 +121,7 @@ const ProductForm = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button onClick={() => navigate('/admin/products')} className="rounded-full p-1.5 hover:bg-gray-100 transition-colors text-gray-400"><ArrowLeft size={16} /></button>
-          <h1 className="text-base font-black text-gray-900 uppercase tracking-tight italic">{isEditing ? 'Editar Producto' : 'Nuevo'}</h1>
+          <h1 className="text-base font-black text-gray-900 uppercase tracking-tight">{isEditing ? 'Editar Producto' : 'Nuevo'}</h1>
         </div>
         <button onClick={handleSubmit} disabled={loading} className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white shadow-md shadow-blue-100 disabled:opacity-50">
           {loading ? <Loader2 className="animate-spin" size={14} /> : <Save size={14} />} Guardar

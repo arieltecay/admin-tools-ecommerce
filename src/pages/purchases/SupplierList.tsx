@@ -63,7 +63,7 @@ const SupplierList = () => {
       {/* Header Compacto */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight italic">Proveedores</h1>
+          <h1 className="text-lg font-black text-gray-900 uppercase tracking-tight">Proveedores</h1>
           <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">{suppliers.length} Registrados</p>
         </div>
         <button 
@@ -121,7 +121,7 @@ const SupplierList = () => {
                 <tr><td colSpan={4} className="px-4 py-10 text-center"><Loader2 className="animate-spin text-blue-600 mx-auto" size={24} /></td></tr>
               ) : suppliers.map((s) => (
                 <tr key={s._id} className="hover:bg-blue-50/20 transition-all group">
-                  <td className="px-4 py-2 text-[11px] font-bold text-gray-900 italic uppercase tracking-tighter">{s.name}</td>
+                  <td className="px-4 py-2 text-[11px] font-bold text-gray-900 uppercase tracking-tighter">{s.name}</td>
                   <td className="px-4 py-2 text-[10px] font-mono text-gray-400">{s.taxId}</td>
                   <td className="px-4 py-2">
                     <div className="flex flex-col gap-0.5">
