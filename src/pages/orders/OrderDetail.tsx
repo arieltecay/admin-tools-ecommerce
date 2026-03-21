@@ -128,20 +128,24 @@ const OrderDetail = () => {
           </div>
 
           <div className="rounded-xl bg-white p-6 shadow-sm border border-gray-100">
-            <h2 className="text-lg font-semibold mb-4 border-b pb-2">Envío y Entrega</h2>
+            <h2 className="text-lg font-semibold mb-4 border-b pb-2">Envío y Pago</h2>
             <div className="grid grid-cols-2 gap-8">
               <div className="space-y-2">
-                <p className="text-xs font-bold text-gray-400 uppercase">Dirección</p>
-                <p className="text-gray-800">{order.shippingAddress.street}</p>
-                <p className="text-gray-800">{order.shippingAddress.city}, {order.shippingAddress.province}</p>
-                <p className="text-gray-800">CP: {order.shippingAddress.postalCode}</p>
+                <p className="text-xs font-bold text-gray-400 uppercase">Dirección de Entrega</p>
+                <p className="text-gray-800 font-medium">{order.shippingAddress?.street}</p>
+                <p className="text-gray-800">{order.shippingAddress?.city}, {order.shippingAddress?.province}</p>
+                <p className="text-gray-800">CP: {order.shippingAddress?.postalCode}</p>
               </div>
               <div className="space-y-2">
-                <p className="text-xs font-bold text-gray-400 uppercase">Método</p>
-                <p className="text-gray-800">{order.shipping.method || 'Estándar'}</p>
-                {order.shipping.trackingNumber && (
-                  <p className="text-sm text-blue-600">Seguimiento: {order.shipping.trackingNumber}</p>
-                )}
+                <p className="text-xs font-bold text-gray-400 uppercase">Método de Pago</p>
+                <p className="text-gray-800 font-bold uppercase text-xs">
+                  {order.payment?.method === 'bank_transfer' ? 'Transferencia Bancaria' : 'Tarjeta de Crédito/Débito'}
+                </p>
+                <p className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-black uppercase ${
+                  order.payment?.status === 'confirmed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {order.payment?.status === 'confirmed' ? 'Pagado' : 'Pendiente de Pago'}
+                </p>
               </div>
             </div>
           </div>
