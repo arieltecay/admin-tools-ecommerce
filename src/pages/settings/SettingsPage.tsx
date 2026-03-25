@@ -29,7 +29,7 @@ const SettingsPage = () => {
     }
   };
 
-  const handleChange = <T extends keyof ISettings>(section: T, field: string, value: any) => {
+  const handleChange = <T extends keyof ISettings>(section: T, field: keyof ISettings[T], value: ISettings[T][keyof ISettings[T]]) => {
     if (!settings) return;
     const currentSection = settings[section];
     if (typeof currentSection === 'object' && currentSection !== null) {
@@ -43,13 +43,13 @@ const SettingsPage = () => {
   const handleNestedChange = <T extends keyof ISettings, S extends keyof ISettings[T]>(
     section: T, 
     subSection: S, 
-    field: string, 
-    value: any
+    field: keyof ISettings[T][S], 
+    value: ISettings[T][S][keyof ISettings[T][S]]
   ) => {
     if (!settings) return;
     const currentSection = settings[section];
     if (typeof currentSection === 'object' && currentSection !== null) {
-      const currentSubSection = (currentSection as any)[subSection];
+      const currentSubSection = currentSection[subSection];
       if (typeof currentSubSection === 'object' && currentSubSection !== null) {
         setSettings({
           ...settings,

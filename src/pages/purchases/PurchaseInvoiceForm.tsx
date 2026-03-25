@@ -4,6 +4,11 @@ import { Save, ArrowLeft, Loader2, Plus, Trash2, Search } from 'lucide-react';
 import api from '../../services/api';
 import { ISupplier, IProduct } from '../../types';
 import AlertModal from '../../components/common/AlertModal';
+import { PurchaseInvoiceItemDTO } from '../../../api/src/services/purchase-invoice.service';
+
+interface InvoiceFormItem extends PurchaseInvoiceItemDTO {
+  subtotal: number;
+}
 
 const PurchaseInvoiceForm = () => {
   const navigate = useNavigate();
@@ -21,9 +26,9 @@ const PurchaseInvoiceForm = () => {
     invoiceNumber: '',
     invoiceDate: new Date().toISOString().split('T')[0],
     supplier: { _id: '', name: '' },
-    invoiceType: 'A',
-    paymentTerms: 'cash',
-    items: [] as any[],
+    invoiceType: 'A' as const, // Usar 'as const' para literal types
+    paymentTerms: 'cash' as const, // Usar 'as const' para literal types
+    items: [] as InvoiceFormItem[],
     totalAmount: 0
   });
 
@@ -48,12 +53,10 @@ const PurchaseInvoiceForm = () => {
     const existing = formData.items.find(item => item.product._id === product._id);
     if (existing) return;
 
-    const newItem = {
+    const newItem: InvoiceFormItem = {
       product: {
         _id: product._id,
-        uuid: product.uuid,
-        sku: product.sku,
-        name: product.name
+        name: product.name,
       },
       quantity: 1,
       unitCost: product.costPrice || 0,
@@ -69,16 +72,16 @@ const PurchaseInvoiceForm = () => {
     setFormData({ ...formData, items: newItems, totalAmount: calculateTotal(newItems) });
   };
 
-  const updateItem = (index: number, field: string, value: any) => {
+  const updateItem = <K extends keyof InvoiceFormItem>(index: number, field: K, value: InvoiceFormItem[K]) => {
     const newItems = [...formData.items];
     newItems[index][field] = value;
     if (field === 'quantity' || field === 'unitCost') {
-      newItems[index].subtotal = newItems[index].quantity * newItems[index].unitCost;
+      newItems[index].subtotal = newItems[index].quantity * (newItems[index].unitCost as number);
     }
     setFormData({ ...formData, items: newItems, totalAmount: calculateTotal(newItems) });
   };
 
-  const calculateTotal = (items: any[]) => {
+  const calculateTotal = (items: InvoiceFormItem[]) => {
     return items.reduce((sum, item) => sum + item.subtotal, 0);
   };
 
@@ -129,7 +132,7 @@ const PurchaseInvoiceForm = () => {
         onClose={() => setAlert({ ...alert, isOpen: false })}
         title={alert.title}
         message={alert.message}
-        type={alert.type as any}
+        type={alert.type}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -171,7 +174,7 @@ const PurchaseInvoiceForm = () => {
                 <label className="text-sm font-medium text-gray-700">Tipo</label>
                 <select 
                   value={formData.invoiceType} 
-                  onChange={(e) => setFormData({ ...formData, invoiceType: e.target.value })}
+                  onChange={(e) => setFormData({ ...formData, invoiceType: e.target.value as 'A' | 'B' | 'C' | 'delivery_note' })}
                   className="w-full rounded-lg border border-gray-200 p-2"
                 >
                   <option value="A">Factura A</option>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Upload, ArrowLeft, Loader2, FileText, CheckCircle, AlertCircle, Download } from 'lucide-react';
 import api from '../../services/api';
 import AlertModal from '../../components/common/AlertModal';
+import axios, { AxiosError } from 'axios';
 
 interface ImportResult {
   successCount: number;
@@ -43,9 +44,14 @@ const ImportProducts = () => {
       if (response.data.errorCount === 0) {
         setAlert({ isOpen: true, title: 'Éxito', message: `Se importaron ${response.data.successCount} productos correctamente`, type: 'success' });
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Import error:', err);
-      setAlert({ isOpen: true, title: 'Error', message: err.response?.data?.message || 'Error al procesar el archivo', type: 'error' });
+      if (axios.isAxiosError(err)) {
+        const axiosError = err as AxiosError<{ message?: string }>;
+        setAlert({ isOpen: true, title: 'Error', message: axiosError.response?.data?.message || 'Error al procesar el archivo', type: 'error' });
+      } else {
+        setAlert({ isOpen: true, title: 'Error', message: 'Error desconocido al procesar el archivo', type: 'error' });
+      }
     } finally {
       setLoading(false);
     }

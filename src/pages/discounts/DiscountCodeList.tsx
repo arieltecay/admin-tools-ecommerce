@@ -107,7 +107,7 @@ const DiscountCodeList = () => {
               <label className="text-sm font-medium text-gray-700">Tipo</label>
               <select 
                 value={formData.type} 
-                onChange={(e) => setFormData({ ...formData, type: e.target.value as any })} 
+                onChange={(e) => setFormData({ ...formData, type: e.target.value as IDiscountCode['type'] })} 
                 className="w-full rounded-lg border border-gray-200 p-2 outline-none focus:border-blue-500"
               >
                 <option value="percentage">Porcentaje (%)</option>

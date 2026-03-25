@@ -102,7 +102,7 @@ const SupplierList = () => {
       </Modal>
 
       <ConfirmModal isOpen={confirmDelete.isOpen} onClose={() => setConfirmDelete({ ...confirmDelete, isOpen: false })} onConfirm={handleDelete} title="Eliminar" message={`¿Eliminar ${confirmDelete.name}?`} type="danger" confirmText="Borrar" />
-      <AlertModal isOpen={alert.isOpen} onClose={() => setAlert({ ...alert, isOpen: false })} title={alert.title} message={alert.message} type={alert.type as any} />
+      <AlertModal isOpen={alert.isOpen} onClose={() => setAlert({ ...alert, isOpen: false })} title={alert.title} message={alert.message} type={alert.type} />
 
       {/* Table con Scroll Horizontal Seguro */}
       <div className="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden">

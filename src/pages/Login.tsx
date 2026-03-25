@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { LogIn, Loader2 } from 'lucide-react';
 import api from '../services/api';
 import { useAuthStore } from '../store/useAuthStore';
+import axios, { AxiosError } from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,8 +23,13 @@ const Login = () => {
       const { user, accessToken } = response.data;
       setAuth(user, accessToken);
       navigate('/admin');
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Error al iniciar sesión. Intenta de nuevo.');
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        const axiosError = err as AxiosError<{ message?: string }>;
+        setError(axiosError.response?.data?.message || 'Error al iniciar sesión. Intenta de nuevo.');
+      } else {
+        setError('Ocurrió un error inesperado. Intenta de nuevo.');
+      }
       console.error('Login error:', err);
     } finally {
       setLoading(false);

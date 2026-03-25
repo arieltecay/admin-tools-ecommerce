@@ -6,6 +6,25 @@ import {
   Clock, Truck, CheckCircle2, AlertCircle, Eye, LayoutGrid
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { IOrder } from '../types';
+
+// Tipos locales para el Dashboard (Desacoplados del API)
+interface TopItem {
+  name: string;
+  total: number;
+  quantity: number;
+}
+
+interface PaymentMethodSummary {
+  method: 'card' | 'bank_transfer';
+  count: number;
+  total: number;
+}
+
+interface OrderStatusDistribution {
+  status: 'pending_payment' | 'confirmed' | 'preparing' | 'shipped' | 'delivered' | 'cancelled' | 'return_requested';
+  count: number;
+}
 
 interface DashboardStats {
   revenue: number;
@@ -14,11 +33,12 @@ interface DashboardStats {
   revenueGrowth: number;
   ordersGrowth: number;
   avgTicketGrowth: number;
-  recentOrders: any[];
-  topProducts: any[];
-  topCategories: any[];
-  paymentMethods: any[];
-  orderStatusDistribution: any[];
+  recentOrders: IOrder[];
+  topProducts: TopItem[];
+  topCategories: TopItem[];
+  topBrands: TopItem[];
+  paymentMethods: PaymentMethodSummary[];
+  orderStatusDistribution: OrderStatusDistribution[];
 }
 
 const Dashboard = () => {
@@ -177,7 +197,7 @@ const Dashboard = () => {
               <LayoutGrid size={14} className="text-blue-600" /> Desempeño Categorías
             </h3>
             <div className="space-y-4">
-              {stats?.topCategories.map((c: any, i: number) => (
+              {stats?.topCategories.map((c: TopItem, i: number) => (
                 <div key={i} className="space-y-1">
                   <div className="flex justify-between items-end">
                     <p className="text-[10px] font-black uppercase tracking-tighter text-gray-800 truncate max-w-[120px]">{c.name}</p>
@@ -238,7 +258,7 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
-                  {stats?.recentOrders.map((o, i) => (
+                  {stats?.recentOrders.map((o: IOrder, i: number) => (
                     <tr key={i} className="hover:bg-gray-50/50 transition-all">
                       <td className="py-2 text-[10px] font-mono font-black text-blue-600">#{o.orderNumber.split('-').pop()}</td>
                       <td className="py-2">
