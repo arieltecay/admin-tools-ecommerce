@@ -15,6 +15,7 @@ import PurchaseInvoiceForm from './pages/purchases/PurchaseInvoiceForm';
 import StockMovementList from './pages/inventory/StockMovementList';
 import DiscountCodeList from './pages/discounts/DiscountCodeList';
 import SettingsPage from './pages/settings/SettingsPage';
+import FinancePage from './pages/finance';
 import AdminLayout from './layout/AdminLayout';
 import { useAuthStore } from './store/useAuthStore';
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="purchases/new" element={<PurchaseInvoiceForm />} />
         <Route path="inventory/movements" element={<StockMovementList />} />
         <Route path="discounts" element={<DiscountCodeList />} />
+        <Route path="finance" element={<FinancePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
 
