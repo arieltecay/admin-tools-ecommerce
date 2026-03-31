@@ -18,6 +18,7 @@ const ProductForm = () => {
 
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [removeBackground, setRemoveBackground] = useState(false);
   const [initialLoading, setInitialLoading] = useState(isEditing);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [brands, setBrands] = useState<IBrand[]>([]);
@@ -83,7 +84,9 @@ const ProductForm = () => {
     uploadData.append('isPrimary', (formData.images?.length === 0).toString());
     setUploading(true);
     try {
-      const res = await api.post<IProduct>(`/products/${uuid}/images`, uploadData, { headers: { 'Content-Type': 'multipart/form-data' } });
+      const res = await api.post<IProduct>(`/products/${uuid}/images?removeBackground=${removeBackground}`, uploadData, { 
+        headers: { 'Content-Type': 'multipart/form-data' } 
+      });
       setFormData(prev => ({ ...prev, images: res.data.images }));
     } catch (err) { console.error(err); } finally { setUploading(false); }
   };
@@ -225,9 +228,21 @@ const ProductForm = () => {
                 </div>
               ))}
               {isEditing ? (
-                <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploading} className="aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-100 rounded-lg text-gray-300 hover:border-blue-500 hover:text-blue-500 transition-all">
-                  {uploading ? <Loader2 className="animate-spin" size={16} /> : <><Plus size={16} /><span className="text-[8px] mt-0.5 uppercase font-black">Subir</span></>}
-                </button>
+                <div className="space-y-2">
+                  <button type="button" onClick={() => fileInputRef.current?.click()} disabled={uploading} className="w-full aspect-square flex flex-col items-center justify-center border-2 border-dashed border-gray-100 rounded-lg text-gray-300 hover:border-blue-500 hover:text-blue-500 transition-all">
+                    {uploading ? <Loader2 className="animate-spin" size={16} /> : <><Plus size={16} /><span className="text-[8px] mt-0.5 uppercase font-black">Subir</span></>}
+                  </button>
+                  <div className="flex items-center gap-1.5 px-1">
+                    <input 
+                      type="checkbox" 
+                      id="removeBg" 
+                      checked={removeBackground} 
+                      onChange={(e) => setRemoveBackground(e.target.checked)}
+                      className="h-3 w-3 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    />
+                    <label htmlFor="removeBg" className="text-[9px] font-black text-gray-400 uppercase tracking-widest cursor-pointer hover:text-blue-600 transition-all">Limpiar fondo (IA)</label>
+                  </div>
+                </div>
               ) : <p className="col-span-2 text-[9px] text-orange-500 font-bold uppercase text-center py-2 bg-orange-50 rounded-lg">Guarda primero para subir fotos</p>}
             </div>
             <input type="file" ref={fileInputRef} onChange={handleUploadImage} className="hidden" accept="image/*" />
