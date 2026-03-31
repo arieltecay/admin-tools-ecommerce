@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, ShoppingCart, Package, Users, Settings, LogOut, Menu, Tags, Bookmark, Truck, FileText, Percent, History, ChevronRight, BarChart3 } from 'lucide-react';
+import { LayoutDashboard, ShoppingCart, Package, Users, Settings, LogOut, Menu, Tags, Bookmark, Truck, FileText, Percent, History, ChevronRight, BarChart3, Layout } from 'lucide-react';
 import { useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
 import api from '../services/api';
@@ -35,6 +35,7 @@ const AdminLayout = () => {
     { name: 'Proveedores', icon: <Truck size={18} />, path: '/admin/suppliers' },
     { name: 'Clientes', icon: <Users size={18} />, path: '/admin/customers' },
     { name: 'Finanzas', icon: <BarChart3 size={18} />, path: '/admin/finance' },
+    { name: 'Banner Hero', icon: <Layout size={18} />, path: '/admin/hero' },
     { name: 'Configuración', icon: <Settings size={18} />, path: '/admin/settings' },
   ];
 
